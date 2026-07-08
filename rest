@@ -1,0 +1,100 @@
+# Geospatial Map of Local Data
+import folium
+
+m = folium.Map(location=[37.54, -77.43], zoom_start=12)
+folium.Marker([37.54, -77.43], tooltip="Location").add_to(m)
+m.save("map.html")
+
+# Data Pipeline (Scrape, Clean, Store, Visualize)
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df = pd.DataFrame({"x":[1,2,3],"y":[4,5,6]})
+df.to_csv("data.csv", index=False)
+plt.plot(df["x"], df["y"])
+plt.show()
+
+# Rock Paper Scissors AI
+import random
+
+history = []
+choices = ["rock","paper","scissors"]
+
+while True:
+    user = input("Choice: ")
+    history.append(user)
+    computer = random.choice(choices)
+    print("Computer:", computer)
+
+# Spam Email Classifier
+text = input("Email: ").lower()
+
+spam = ["free","winner","money","offer"]
+
+if any(word in text for word in spam):
+    print("Spam")
+else:
+    print("Not Spam")
+
+# Digit Recognizer (MNIST)
+from tensorflow.keras.datasets import mnist
+
+(x_train,y_train),(x_test,y_test)=mnist.load_data()
+print(x_train.shape)
+
+# Movie Recommender
+movies = {
+    "Action":["John Wick","Mad Max"],
+    "Comedy":["Shrek","The Mask"]
+}
+
+genre = input("Genre: ")
+print(movies.get(genre,[]))
+
+# Sentiment Analyzer
+from textblob import TextBlob
+
+review = input("Review: ")
+print(TextBlob(review).sentiment)
+
+# Rule-Based Chatbot
+while True:
+    msg = input("You: ").lower()
+
+    if "hello" in msg:
+        print("Bot: Hi!")
+    elif "bye" in msg:
+        break
+    else:
+        print("Bot: I don't know.")
+
+# LLM Chatbot
+from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model="gpt-4.1-mini",
+    input="Hello!"
+)
+
+print(response.output_text)
+
+# Image Classifier
+from tensorflow.keras.applications import MobileNetV2
+
+model = MobileNetV2(weights="imagenet")
+print(model.summary())
+
+# OCR Tool
+import pytesseract
+from PIL import Image
+
+img = Image.open("image.png")
+print(pytesseract.image_to_string(img))
+
+# Music Genre Classifier
+genres = ["Rock","Pop","Jazz","Hip-Hop"]
+
+song = input("Song Name: ")
+print(song, "->", genres[0])
