@@ -1,0 +1,153 @@
+# Physics-Based Pool/Billiards Simulator
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((600,400))
+ball = pygame.Vector2(100,200)
+vel = pygame.Vector2(4,3)
+
+while True:
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+
+    ball += vel
+    if ball.x < 10 or ball.x > 590:
+        vel.x *= -1
+    if ball.y < 10 or ball.y > 390:
+        vel.y *= -1
+
+    screen.fill((0,100,0))
+    pygame.draw.circle(screen,(255,255,255),(int(ball.x),int(ball.y)),10)
+    pygame.display.flip()
+
+# Dice Roll Probability Simulator
+import random
+
+rolls = [random.randint(1,6) for _ in range(1000)]
+for i in range(1,7):
+    print(i, rolls.count(i))
+
+# Coin Flip Streak Simulator
+import random
+
+streak = longest = 0
+
+for _ in range(100):
+    if random.choice(["H","T"]) == "H":
+        streak += 1
+        longest = max(longest, streak)
+    else:
+        streak = 0
+
+print(longest)
+
+# Bouncing Ball Physics
+import turtle
+
+ball = turtle.Turtle(shape="circle")
+ball.penup()
+
+dx, dy = 3, 3
+
+while True:
+    x, y = ball.position()
+    if abs(x) > 290:
+        dx *= -1
+    if abs(y) > 290:
+        dy *= -1
+    ball.goto(x + dx, y + dy)
+
+# Traffic Light Controller
+import time
+
+lights = ["Red", "Green", "Yellow"]
+
+while True:
+    for light in lights:
+        print(light)
+        time.sleep(2)
+
+# Elevator Simulation
+floor = 1
+
+while True:
+    target = int(input("Floor: "))
+    while floor != target:
+        floor += 1 if target > floor else -1
+        print("Floor", floor)
+
+# Robot Maze Solver
+maze = [
+    "S....",
+    ".###.",
+    "...#E"
+]
+
+for row in maze:
+    print(row)
+
+print("Simple BFS would solve this.")
+
+# Conway's Game of Life
+grid = [
+    [0,1,0],
+    [0,1,0],
+    [0,1,0]
+]
+
+for row in grid:
+    print(row)
+
+# Predator-Prey Simulation
+rabbits = 20
+foxes = 5
+
+for _ in range(10):
+    rabbits += 5 - foxes
+    foxes += rabbits // 20
+    print(rabbits, foxes)
+
+# Solar System Orbit Simulator
+import pygame, math
+
+pygame.init()
+screen = pygame.display.set_mode((500,500))
+angle = 0
+
+while True:
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            pygame.quit()
+            quit()
+
+    angle += 0.02
+
+    x = 250 + math.cos(angle) * 120
+    y = 250 + math.sin(angle) * 120
+
+    screen.fill((0,0,0))
+    pygame.draw.circle(screen,(255,255,0),(250,250),20)
+    pygame.draw.circle(screen,(0,0,255),(int(x),int(y)),8)
+    pygame.display.flip()
+
+# Self-Driving Car (Rule Based)
+road = ["|   |"]
+
+car = 2
+
+while True:
+    print("|" + " " * car + "A" + " " * (2-car) + "|")
+    move = input("a/d: ")
+    if move == "a":
+        car = max(0, car-1)
+    elif move == "d":
+        car = min(2, car+1)
+
+# Traffic Flow Simulator
+cars = [0,2,4,6]
+
+for _ in range(10):
+    cars = [c+1 for c in cars]
+    print(cars)
