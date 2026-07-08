@@ -1,0 +1,128 @@
+# Job Listing Aggregator
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://remoteok.com"
+html = requests.get(url, headers={"User-Agent":"Mozilla/5.0"}).text
+
+soup = BeautifulSoup(html, "html.parser")
+
+for job in soup.find_all("h2")[:10]:
+    print(job.text.strip())
+
+# Full-Stack App with Authentication (Flask)
+from flask import Flask
+from flask_login import LoginManager
+
+app = Flask(__name__)
+app.secret_key = "secret"
+
+login = LoginManager(app)
+
+@app.route("/")
+def home():
+    return "Logged In"
+
+app.run()
+
+# Real-Time Chat App (WebSockets)
+from flask import Flask
+from flask_socketio import SocketIO, send
+
+app = Flask(__name__)
+socketio = SocketIO(app)
+
+@socketio.on("message")
+def handle(msg):
+    send(msg, broadcast=True)
+
+socketio.run(app)
+
+# Unit Converter
+value = float(input("Value: "))
+print("Meters to Feet:", value * 3.28084)
+
+# BMI / Calorie Calculator
+weight = float(input("Weight (kg): "))
+height = float(input("Height (m): "))
+
+bmi = weight / (height ** 2)
+print("BMI:", round(bmi, 2))
+
+# Quiz Game
+questions = {
+    "Capital of France? ":"Paris",
+    "5+7? ":"12"
+}
+
+score = 0
+
+for q, a in questions.items():
+    if input(q) == a:
+        score += 1
+
+print("Score:", score)
+
+# Caesar Cipher
+text = input("Text: ")
+shift = 3
+
+result = ""
+
+for c in text:
+    if c.isalpha():
+        base = ord("A") if c.isupper() else ord("a")
+        result += chr((ord(c)-base+shift)%26+base)
+    else:
+        result += c
+
+print(result)
+
+# Markdown to HTML Converter
+import markdown
+
+text = open("README.md").read()
+
+html = markdown.markdown(text)
+
+open("index.html","w").write(html)
+
+# Command-Line Password Manager
+passwords = {}
+
+while True:
+    site = input("Site (quit to stop): ")
+    if site == "quit":
+        break
+    passwords[site] = input("Password: ")
+
+print(passwords)
+
+# Log File Analyzer
+from collections import Counter
+
+lines = open("log.txt").read().splitlines()
+
+print(Counter(lines))
+
+# Custom Shell
+import os
+
+while True:
+    cmd = input("$ ")
+
+    if cmd == "exit":
+        break
+
+    os.system(cmd)
+
+# Static Site Generator
+import markdown
+import os
+
+os.makedirs("site", exist_ok=True)
+
+for file in os.listdir("."):
+    if file.endswith(".md"):
+        html = markdown.markdown(open(file).read())
+        open(f"site/{file[:-3]}.html","w").write(html)
