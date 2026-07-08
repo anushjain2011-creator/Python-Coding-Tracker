@@ -1,0 +1,132 @@
+# Desktop Notification App
+from plyer import notification
+
+notification.notify(
+    title="Reminder",
+    message="Time to take a break!",
+    timeout=5
+)
+
+# Web Form Auto-filler (Selenium)
+from selenium import webdriver
+
+driver = webdriver.Chrome()
+driver.get("https://example.com")
+driver.find_element("name", "q").send_keys("Python")
+
+# File Watcher
+from watchdog.observers import Observer
+from watchdog.events import FileSystemEventHandler
+import time
+
+class Watch(FileSystemEventHandler):
+    def on_modified(self, event):
+        print(event.src_path)
+
+observer = Observer()
+observer.schedule(Watch(), ".", recursive=False)
+observer.start()
+
+try:
+    while True:
+        time.sleep(1)
+except KeyboardInterrupt:
+    observer.stop()
+observer.join()
+
+# Automated PDF Report Generator
+from reportlab.pdfgen import canvas
+
+pdf = canvas.Canvas("report.pdf")
+pdf.drawString(100, 750, "Hello Report")
+pdf.save()
+
+# Task Scheduler
+import schedule
+import time
+
+def job():
+    print("Running task")
+
+schedule.every(10).seconds.do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+# Number Guessing Game
+import random
+
+number = random.randint(1, 100)
+
+while True:
+    guess = int(input("Guess: "))
+    if guess == number:
+        print("Correct!")
+        break
+    elif guess < number:
+        print("Too low")
+    else:
+        print("Too high")
+
+# Rock Paper Scissors
+import random
+
+choices = ["rock", "paper", "scissors"]
+computer = random.choice(choices)
+user = input("Choose: ").lower()
+
+print("Computer:", computer)
+
+if user == computer:
+    print("Tie")
+elif (user == "rock" and computer == "scissors") or \
+     (user == "paper" and computer == "rock") or \
+     (user == "scissors" and computer == "paper"):
+    print("You win!")
+else:
+    print("You lose!")
+
+# Hangman (Simple)
+import random
+
+words = ["python", "apple", "computer"]
+word = random.choice(words)
+guess = ""
+
+while guess != word:
+    guess = input("Guess word: ")
+
+print("You won!")
+
+# Tic-Tac-Toe (2 Player)
+board = [" "] * 9
+
+def show():
+    for i in range(0, 9, 3):
+        print(board[i:i+3])
+
+player = "X"
+
+while " " in board:
+    show()
+    move = int(input("0-8: "))
+    if board[move] == " ":
+        board[move] = player
+        player = "O" if player == "X" else "X"
+
+print("Game Over")
+
+# Text Adventure
+room = "start"
+
+while True:
+    if room == "start":
+        choice = input("Left or Right? ").lower()
+        room = "treasure" if choice == "left" else "monster"
+    elif room == "treasure":
+        print("You found treasure!")
+        break
+    else:
+        print("A monster got you!")
+        break
