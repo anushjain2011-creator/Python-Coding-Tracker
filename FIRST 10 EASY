@@ -1,0 +1,85 @@
+. File Renamer
+import os
+
+for i, file in enumerate(os.listdir(".")):
+    if os.path.isfile(file):
+        name, ext = os.path.splitext(file)
+        os.rename(file, f"file_{i}{ext}")
+
+ 2. Duplicate File Finder
+import os
+import hashlib
+
+seen = {}
+for root, _, files in os.walk("."):
+    for file in files:
+        path = os.path.join(root, file)
+        with open(path, "rb") as f:
+            h = hashlib.md5(f.read()).hexdigest()
+        if h in seen:
+            print("Duplicate:", path)
+        else:
+            seen[h] = path
+
+ 3. Folder Organizer
+import os
+import shutil
+
+for file in os.listdir("."):
+    if os.path.isfile(file):
+        ext = os.path.splitext(file)[1][1:] or "other"
+        os.makedirs(ext, exist_ok=True)
+        shutil.move(file, os.path.join(ext, file))
+
+ 4. Auto Image Resizer
+from PIL import Image
+import os
+
+for file in os.listdir("."):
+    if file.endswith((".png", ".jpg", ".jpeg")):
+        img = Image.open(file)
+        img.thumbnail((500, 500))
+        img.save("small_" + file)
+
+ 5. PDF Merger
+from PyPDF2 import PdfMerger
+
+merger = PdfMerger()
+for pdf in ["a.pdf", "b.pdf"]:
+    merger.append(pdf)
+merger.write("merged.pdf")
+merger.close()
+
+ 6. Password Generator
+import random
+import string
+
+password = "".join(random.choice(string.ascii_letters + string.digits) for _ in range(12))
+print(password)
+ 7. Email Sender
+import smtplib
+
+server = smtplib.SMTP("smtp.gmail.com", 587)
+server.starttls()
+server.login("email@gmail.com", "password")
+server.sendmail("from", "to", "Hello!")
+server.quit()
+
+ 8. Screenshot
+import pyautogui
+
+img = pyautogui.screenshot()
+img.save("screen.png")
+
+ 9. Auto Backup
+import shutil
+
+shutil.copytree("source_folder", "backup_folder", dirs_exist_ok=True)
+
+ 10. Clipboard Manager
+import pyperclip
+
+while True:
+    text = input("Copy: ")
+    pyperclip.copy(text)
+    print("Copied!")
