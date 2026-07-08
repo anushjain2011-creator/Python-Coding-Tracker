@@ -1,0 +1,143 @@
+# Face Detection with Webcam
+import cv2
+
+cam = cv2.VideoCapture(0)
+face = cv2.CascadeClassifier(cv2.data.haarcascades +
+                             "haarcascade_frontalface_default.xml")
+
+while True:
+    ok, frame = cam.read()
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    for (x, y, w, h) in face.detectMultiScale(gray, 1.3, 5):
+        cv2.rectangle(frame, (x, y), (x+w, y+h), (255,0,0), 2)
+
+    cv2.imshow("Face Detection", frame)
+
+    if cv2.waitKey(1) == 27:
+        break
+
+cam.release()
+cv2.destroyAllWindows()
+
+# Self-Driving Car in a Simulator (Basic RL Skeleton)
+import gymnasium as gym
+
+env = gym.make("CartPole-v1")
+
+obs, _ = env.reset()
+
+for _ in range(500):
+    action = env.action_space.sample()
+    obs, reward, done, truncated, info = env.step(action)
+    if done or truncated:
+        obs, _ = env.reset()
+
+env.close()
+
+# Custom Neural Network from Scratch
+import random
+import math
+
+weights = [random.random(), random.random()]
+bias = random.random()
+
+x = [2, 3]
+
+output = sum(a*b for a,b in zip(x,weights)) + bias
+output = 1/(1+math.exp(-output))
+
+print(output)
+
+# Style Transfer Image Generator
+import cv2
+
+img = cv2.imread("image.jpg")
+style = cv2.stylization(img)
+cv2.imwrite("styled.jpg", style)
+
+# Personal Portfolio Site (Flask)
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return "<h1>My Portfolio</h1>"
+
+app.run()
+
+# Weather App Using API
+import requests
+
+city = input("City: ")
+
+url = f"https://wttr.in/{city}?format=3"
+
+print(requests.get(url).text)
+
+# URL Shortener
+import pyshorteners
+
+s = pyshorteners.Shortener()
+
+print(s.tinyurl.short(input("URL: ")))
+
+# Simple Blog with Flask
+from flask import Flask
+
+app = Flask(__name__)
+
+posts = []
+
+@app.route("/")
+def index():
+    return "<br>".join(posts)
+
+@app.route("/add/<text>")
+def add(text):
+    posts.append(text)
+    return "Added"
+
+app.run()
+
+# REST API for To-Do List
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+tasks = ["Homework","Code"]
+
+@app.route("/tasks")
+def get_tasks():
+    return jsonify(tasks)
+
+app.run()
+
+# Web Scraper for Price Tracking
+import requests
+from bs4 import BeautifulSoup
+
+html = requests.get("https://example.com").text
+
+soup = BeautifulSoup(html,"html.parser")
+
+print(soup.title.text)
+
+# Discord Bot
+import discord
+
+client = discord.Client(intents=discord.Intents.default())
+
+@client.event
+async def on_ready():
+    print("Bot Ready")
+
+client.run("YOUR_TOKEN")
+
+# Twitter/X Bot
+import tweepy
+
+client = tweepy.Client("TOKEN")
+
+client.create_tweet(text="Hello World!")
