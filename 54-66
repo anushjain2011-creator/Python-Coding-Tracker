@@ -1,0 +1,83 @@
+# Shared Calendar Sync (Google Calendar API)
+from googleapiclient.discovery import build
+
+service = build("calendar", "v3")
+print("Connected")
+
+# Smart Scheduler
+tasks = [("Math",2),("Coding",3),("Gym",1)]
+tasks.sort(key=lambda x:x[1])
+print(tasks)
+
+# Weather Data Fetcher + Chart
+import requests
+import matplotlib.pyplot as plt
+
+temp = requests.get("https://wttr.in/?format=%t").text
+plt.bar(["Temp"], [int(temp[:-2])])
+plt.show()
+
+# CSV Cleaner and Summarizer
+import pandas as pd
+
+df = pd.read_csv("data.csv")
+df = df.drop_duplicates().dropna()
+print(df.describe())
+
+# Personal Expense Tracker
+expenses = []
+
+while True:
+    item = input("Expense (quit to stop): ")
+    if item == "quit":
+        break
+    amount = float(input("Amount: "))
+    expenses.append(amount)
+
+print("Total:", sum(expenses))
+
+# Word Frequency Counter
+from collections import Counter
+
+text = open("text.txt").read().lower().split()
+print(Counter(text))
+
+# COVID / Stock Data Line Chart
+import matplotlib.pyplot as plt
+
+data = [5,8,7,10,12]
+plt.plot(data)
+plt.show()
+
+# Interactive Dashboard (Streamlit)
+import streamlit as st
+
+st.title("Dashboard")
+st.line_chart([1,5,3,8,4])
+
+# Sports Stats Scraper
+import requests
+from bs4 import BeautifulSoup
+
+html = requests.get("https://example.com").text
+soup = BeautifulSoup(html,"html.parser")
+print(soup.title)
+
+# Reddit/Twitter Sentiment Tracker
+from textblob import TextBlob
+
+text = input("Text: ")
+print(TextBlob(text).sentiment)
+
+# Budget Forecaster
+income = float(input("Income: "))
+expense = float(input("Expense: "))
+
+for i in range(1,13):
+    print(i, income*i-expense*i)
+
+# Real-Time Stock Price Dashboard
+import yfinance as yf
+
+stock = yf.Ticker("AAPL")
+print(stock.history(period="1d"))
