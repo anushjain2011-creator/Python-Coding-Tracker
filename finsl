@@ -1,0 +1,169 @@
+# Package Dependency Resolver
+packages = {
+    "app":["numpy","pandas"],
+    "numpy":["python"],
+    "pandas":["numpy"]
+}
+
+def install(pkg, done=set()):
+    if pkg not in done:
+        for dep in packages.get(pkg,[]):
+            install(dep, done)
+        done.add(pkg)
+        print("Install:", pkg)
+
+install("app")
+
+# Prime Number Generator
+def primes(limit):
+    for n in range(2, limit):
+        if all(n % i for i in range(2,n)):
+            print(n)
+
+primes(100)
+
+# Fibonacci Sequence Visualizer
+import matplotlib.pyplot as plt
+
+fib = [0,1]
+
+for i in range(10):
+    fib.append(fib[-1]+fib[-2])
+
+plt.plot(fib)
+plt.show()
+
+# Sorting Algorithm Visualizer
+import matplotlib.pyplot as plt
+
+numbers = [5,3,8,1,2]
+
+for i in range(len(numbers)):
+    for j in range(len(numbers)-1):
+        if numbers[j] > numbers[j+1]:
+            numbers[j],numbers[j+1] = numbers[j+1],numbers[j]
+        plt.bar(range(len(numbers)),numbers)
+        plt.pause(.1)
+
+plt.show()
+
+# Pathfinding Visualizer (A* Basic)
+grid = [
+[0,0,0],
+[1,1,0],
+[0,0,0]
+]
+
+start=(0,0)
+end=(2,2)
+
+queue=[start]
+visited=[]
+
+while queue:
+    node=queue.pop(0)
+    visited.append(node)
+
+    if node==end:
+        break
+
+print("Path searched:",visited)
+
+# Sudoku Solver
+board=[
+[5,3,0],
+[6,0,0],
+[0,9,8]
+]
+
+def solve():
+    for row in board:
+        print(row)
+
+solve()
+
+# Maze Generator + Solver
+import random
+
+maze=[]
+
+for i in range(5):
+    maze.append(["#" if random.random()<.3 else "." for _ in range(5)])
+
+for row in maze:
+    print("".join(row))
+
+# N-Queens Solver
+N=4
+
+def place(row,cols):
+    if row==N:
+        print(cols)
+        return
+
+    for col in range(N):
+        if col not in cols:
+            place(row+1,cols+[col])
+
+place(0,[])
+
+# Mandelbrot Fractal Generator
+import matplotlib.pyplot as plt
+
+x=[]
+y=[]
+
+for a in range(-100,100):
+    for b in range(-100,100):
+        c=complex(a/50,b/50)
+        z=0
+
+        for i in range(20):
+            z=z*z+c
+
+        if abs(z)<2:
+            x.append(a)
+            y.append(b)
+
+plt.scatter(x,y,s=1)
+plt.show()
+
+# Genetic Algorithm Puzzle Solver
+import random
+
+target="hello"
+
+population=[
+"".join(random.choice("abcdefghijklmnopqrstuvwxyz") for _ in target)
+for _ in range(10)
+]
+
+for generation in range(100):
+    population.sort(
+        key=lambda x:sum(a!=b for a,b in zip(x,target))
+    )
+
+    if population[0]==target:
+        break
+
+    population=population[:5]+[
+        "".join(random.choice("abcdefghijklmnopqrstuvwxyz") for _ in target)
+        for _ in range(5)
+    ]
+
+print(population[0])
+
+# Neural Network Trained on Custom Data
+import numpy as np
+
+X=np.array([[0,0],[0,1],[1,0],[1,1]])
+y=np.array([[0],[1],[1],[0]])
+
+weights=np.random.rand(2,1)
+
+for _ in range(1000):
+    output=X.dot(weights)
+    error=y-output
+    weights+=X.T.dot(error)*0.01
+
+print(weights)
