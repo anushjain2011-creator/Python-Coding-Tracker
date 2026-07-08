@@ -1,0 +1,112 @@
+# Ant Colony Pathfinding Simulation
+import random
+
+path = [random.randint(1, 10) for _ in range(5)]
+for _ in range(10):
+    path[random.randint(0, 4)] -= 1
+print(path)
+
+# Epidemic Spread Model (SIR)
+S, I, R = 95, 5, 0
+
+for _ in range(10):
+    new = min(S, I)
+    S -= new
+    I += new - 1
+    R += 1
+    print(S, I, R)
+
+# Robot Arm Inverse Kinematics
+import math
+
+x, y = 100, 100
+angle = math.degrees(math.atan2(y, x))
+print("Angle:", angle)
+
+# Warehouse Robot Pathing
+grid = [["."] * 5 for _ in range(5)]
+robot = (0, 0)
+target = (4, 4)
+
+print("Robot:", robot)
+print("Target:", target)
+
+# Command-Line Calendar Viewer
+import calendar
+
+year = int(input("Year: "))
+month = int(input("Month: "))
+print(calendar.month(year, month))
+
+# To-Do List (CLI)
+tasks = []
+
+while True:
+    task = input("Task (or quit): ")
+    if task == "quit":
+        break
+    tasks.append(task)
+
+print(tasks)
+
+# Countdown Timer
+import time
+
+seconds = int(input("Seconds: "))
+
+while seconds:
+    print(seconds)
+    time.sleep(1)
+    seconds -= 1
+
+print("Done!")
+
+# Pomodoro Timer
+import time
+
+print("Work for 25 seconds...")
+time.sleep(25)
+print("Break!")
+
+# Habit Tracker
+habits = {}
+
+while True:
+    habit = input("Habit (or quit): ")
+    if habit == "quit":
+        break
+    habits[habit] = habits.get(habit, 0) + 1
+
+print(habits)
+
+# Calendar App (Tkinter)
+import tkinter as tk
+import calendar
+
+root = tk.Tk()
+
+text = tk.Text(root)
+text.pack()
+
+text.insert("1.0", calendar.month(2026, 1))
+
+root.mainloop()
+
+# Event Reminder
+import time
+
+event = input("Event: ")
+delay = int(input("Seconds: "))
+
+time.sleep(delay)
+print("Reminder:", event)
+
+# Meeting Scheduler
+people = {
+    "Alice": ["9AM", "1PM"],
+    "Bob": ["10AM", "1PM"],
+    "You": ["1PM", "3PM"]
+}
+
+common = set(people["Alice"]) & set(people["Bob"]) & set(people["You"])
+print("Available:", common)
