@@ -1,0 +1,114 @@
+# Memory Matching Game
+import random
+
+cards = list("AABBCCDD")
+random.shuffle(cards)
+print(cards)
+
+# Snake Game (Pygame)
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((400, 400))
+running = True
+
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.fill((0, 0, 0))
+    pygame.display.update()
+
+pygame.quit()
+
+# Tic-Tac-Toe with AI (Random AI)
+import random
+
+board = [" "] * 9
+
+while " " in board:
+    move = int(input("Your move (0-8): "))
+    if board[move] == " ":
+        board[move] = "X"
+
+    empty = [i for i, x in enumerate(board) if x == " "]
+    if empty:
+        board[random.choice(empty)] = "O"
+
+    print(board)
+
+# Connect 4
+board = [["."] * 7 for _ in range(6)]
+
+for row in board:
+    print(" ".join(row))
+
+# 2048 Clone
+board = [
+    [2, 0, 2, 4],
+    [0, 4, 0, 2],
+    [2, 0, 4, 0],
+    [0, 2, 0, 2]
+]
+
+for row in board:
+    print(row)
+
+# Simple Platformer
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((500, 300))
+x = 50
+
+running = True
+while running:
+    for e in pygame.event.get():
+        if e.type == pygame.QUIT:
+            running = False
+
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_RIGHT]:
+        x += 5
+    if keys[pygame.K_LEFT]:
+        x -= 5
+
+    screen.fill((255, 255, 255))
+    pygame.draw.rect(screen, (0, 0, 255), (x, 200, 40, 40))
+    pygame.display.flip()
+
+pygame.quit()
+
+# Blackjack
+import random
+
+cards = [2,3,4,5,6,7,8,9,10,10,10,10,11]
+player = random.choice(cards) + random.choice(cards)
+dealer = random.choice(cards) + random.choice(cards)
+
+print("Player:", player)
+print("Dealer:", dealer)
+
+# Chess Move Validator
+move = input("Enter move (e2e4): ")
+
+if len(move) == 4:
+    print("Valid format")
+else:
+    print("Invalid")
+
+# Multiplayer Tic-Tac-Toe
+import socket
+
+server = socket.socket()
+print("Socket created")
+
+# Roguelike Dungeon Crawler
+import random
+
+grid = [["."] * 5 for _ in range(5)]
+x = y = 2
+grid[y][x] = "@"
+
+for row in grid:
+    print(" ".join(row))
